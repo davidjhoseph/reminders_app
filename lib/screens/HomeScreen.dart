@@ -3,9 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reminder_app/provider/ListProvider.dart';
 import 'package:reminder_app/screens/ScheduledScreen.dart';
 import 'package:reminder_app/widgets/home_screen/MenuBox.dart';
-import 'package:riverpod/riverpod.dart';
 
-final lists = Provider((ref) => ListProvider());
+final listsProvider = ChangeNotifierProvider((ref) => ListProvider());
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -116,20 +115,24 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 20),
-                Consumer(builder: (context, watch, child) {
-                  final response = watch(lists);
-                  return response.lists.isEmpty
-                      ? Text("No List Yet")
-                      : Column(
-                          children: [
-                            Text(response.greet),
-                            TextButton(
-                              onPressed: response.changeGreeting(),
-                              child: Text("Change text"),
-                            )
-                          ],
-                        );
-                })
+                Consumer(
+                  builder: (context, watch, child) {
+                    final response = watch(listsProvider);
+                    return response.lists.isEmpty
+                        ? Text("No List Yet")
+                        : Column(
+                            children: [
+                              // response.lists.map((e) => ListTile(leading: e.icon,)).toList()
+                            ],
+                          );
+                  },
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.read(listsProvider).changeGreeting("Bad Girl");
+                  },
+                  child: Text("Change text"),
+                )
               ],
             ),
           ),
