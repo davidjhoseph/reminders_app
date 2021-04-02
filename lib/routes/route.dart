@@ -7,7 +7,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case Home:
       return MaterialPageRoute(builder: (_) => HomeScreen());
-    // case Scheduled:
-    //   return MaterialPageRoute(builder: (_) => ScheduledScreen());
+    case ScheduledScreen.routeName:
+      return MaterialPageRoute(builder: (_) => ScheduledScreen());
   }
 }

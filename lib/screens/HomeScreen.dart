@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reminder_app/provider/ListProvider.dart';
 import 'package:reminder_app/screens/ScheduledScreen.dart';
 import 'package:reminder_app/widgets/home_screen/MenuBox.dart';
+import 'package:riverpod/riverpod.dart';
+
+final lists = Provider((ref) => ListProvider());
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -12,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
-          FlatButton(
+          TextButton(
             onPressed: () {},
             child: Text(
               "Edit",
@@ -68,7 +72,8 @@ class HomeScreen extends StatelessWidget {
                       title: "Today",
                       icon: Icons.calendar_today,
                       navigate: () {
-                        Get.to(() => ScheduledScreen());
+                        Navigator.of(context)
+                            .pushNamed(ScheduledScreen.routeName);
                       },
                     ),
                     Spacer(),
@@ -78,7 +83,8 @@ class HomeScreen extends StatelessWidget {
                       title: "Scheduled",
                       icon: Icons.schedule,
                       navigate: () {
-                        Get.to(() => ScheduledScreen());
+                        Navigator.of(context)
+                            .pushNamed(ScheduledScreen.routeName);
                       },
                     ),
                   ],
@@ -92,7 +98,8 @@ class HomeScreen extends StatelessWidget {
                       title: "All",
                       icon: Icons.store,
                       navigate: () {
-                        Get.to(() => ScheduledScreen());
+                        Navigator.of(context)
+                            .pushNamed(ScheduledScreen.routeName);
                       },
                     ),
                     Spacer(),
@@ -102,11 +109,27 @@ class HomeScreen extends StatelessWidget {
                       title: "Flagged",
                       icon: Icons.flag,
                       navigate: () {
-                        Get.to(() => ScheduledScreen());
+                        Navigator.of(context)
+                            .pushNamed(ScheduledScreen.routeName);
                       },
                     ),
                   ],
                 ),
+                SizedBox(height: 20),
+                Consumer(builder: (context, watch, child) {
+                  final response = watch(lists);
+                  return response.lists.isEmpty
+                      ? Text("No List Yet")
+                      : Column(
+                          children: [
+                            Text(response.greet),
+                            TextButton(
+                              onPressed: response.changeGreeting(),
+                              child: Text("Change text"),
+                            )
+                          ],
+                        );
+                })
               ],
             ),
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ScheduledScreen extends StatelessWidget {
+  static const String routeName = '/scheduled';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,18 +37,6 @@ class ScheduledScreen extends StatelessWidget {
             Container(
               child: Text("This is the Scheduled Screen"),
             ),
-            FlatButton(
-                onPressed: () {
-                  Get.defaultDialog(
-                      title: "Hey",
-                      content: Text("Are you sure?"),
-                      actions: [
-                        Text("yes"),
-                        Text("No"),
-                      ],
-                      radius: 5);
-                },
-                child: Text("Open Modal")),
           ],
         ),
       ),

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:reminder_app/settings/Theme.dart';
 import './routes/route.dart' as route;
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +20,7 @@ class MyApp extends StatelessWidget {
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
-      child: GetMaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: "/",
         onGenerateRoute: route.generateRoute,
