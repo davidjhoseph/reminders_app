@@ -10,17 +10,7 @@ class ListProvider extends ChangeNotifier {
       reminders: ["Hello", "World"],
     ),
   ];
-  String _greet = "Salo";
   List<SingleList> get lists {
     return [..._lists];
-  }
-
-  String get greet {
-    return _greet;
-  }
-
-  changeGreeting(string) {
-    _greet = string;
-    notifyListeners();
   }
 }

@@ -119,6 +119,15 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 20),
+                      Text(
+                        "My Lists",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      SizedBox(height: 10),
                       Consumer(
                         builder: (context, watch, child) {
                           final response = watch(listsProvider);
@@ -146,8 +155,42 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          Row(
-            children: [Text("Hello")],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () => print("New Reminder"),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        child: Icon(Icons.add),
+                        radius: 12,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        "New Reminder",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Spacer(),
+                TextButton(
+                  onPressed: () => print("Add List"),
+                  child: Text(
+                    "Add List",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                )
+              ],
+            ),
           )
         ],
       ),
