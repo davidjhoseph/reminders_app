@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reminder_app/provider/ListProvider.dart';
+import 'package:reminder_app/provider/ReminderProvider.dart';
+import 'package:reminder_app/screens/AddListScreen.dart';
 import 'package:reminder_app/screens/ScheduledScreen.dart';
 import 'package:reminder_app/widgets/ReminderList.dart';
 import 'package:reminder_app/widgets/home_screen/MenuBox.dart';
 
-final listsProvider = ChangeNotifierProvider((ref) => ListProvider());
+final reminderProvider = Provider((ref) => ReminderProvider());
 
 class HomeScreen extends StatelessWidget {
+  static const routeName = '/';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                       SizedBox(height: 10),
                       Consumer(
                         builder: (context, watch, child) {
-                          final response = watch(listsProvider);
+                          final response = watch(reminderProvider);
                           return response.lists.isEmpty
                               ? Text("No List Yet")
                               : Column(
@@ -180,7 +182,11 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Spacer(),
                 TextButton(
-                  onPressed: () => print("Add List"),
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => AddListScreen(),
+                    ),
+                  ),
                   child: Text(
                     "Add List",
                     style: TextStyle(
