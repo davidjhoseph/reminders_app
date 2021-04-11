@@ -7,7 +7,7 @@ class ReminderProvider extends ChangeNotifier {
       color: Colors.orange[500],
       icon: Icons.ac_unit,
       title: "Reminders",
-      reminders: ["Hello", "World"],
+      reminders: [],
     ),
   ];
   List<Color> colors = [

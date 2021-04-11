@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
+import 'package:reminder_app/Models/SingleList.dart';
 import 'package:reminder_app/provider/ReminderProvider.dart';
 
 final reminderData = ChangeNotifierProvider((ref) => ReminderProvider());
@@ -23,7 +25,10 @@ class _AddListScreenState extends State<AddListScreen> {
             elevation: 0,
             leadingWidth: 70,
             leading: TextButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () async {
+                await Hive.close();
+                Navigator.of(context).pop();
+              },
               child: Text(
                 "Cancel",
               ),
@@ -41,11 +46,18 @@ class _AddListScreenState extends State<AddListScreen> {
                 onPressed: titleController.text.length < 1
                     ? null
                     : () {
-                        response.addToList(
-                          icon: response.selectedIcon,
-                          color: response.selectedColor,
+                        final SingleList list = SingleList(
                           title: titleController.text,
+                          color: response.selectedColor,
+                          icon: response.selectedIcon,
                         );
+                        Hive.box("reminderList").add(list);
+
+                        // response.addToList(
+                        //   icon: response.selectedIcon,
+                        //   color: response.selectedColor,
+                        //   title: titleController.text,
+                        // );
                         Navigator.pop(context);
                       },
                 child: Text(

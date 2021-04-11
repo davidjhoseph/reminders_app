@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 import 'package:reminder_app/provider/ReminderProvider.dart';
 import 'package:reminder_app/screens/AddListScreen.dart';
 import 'package:reminder_app/screens/ScheduledScreen.dart';
@@ -182,11 +183,14 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Spacer(),
                 TextButton(
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => AddListScreen(),
-                    ),
-                  ),
+                  onPressed: () async {
+                    await Hive.openBox("reminderList");
+                    return Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => AddListScreen(),
+                      ),
+                    );
+                  },
                   child: Text(
                     "Add List",
                     style: TextStyle(
