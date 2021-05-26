@@ -1,6 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
 import 'package:reminder_app/provider/ReminderProvider.dart';
 import 'package:reminder_app/screens/AddListScreen.dart';
 import 'package:reminder_app/screens/ScheduledScreen.dart';
@@ -34,12 +34,12 @@ class HomeScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(5),
+                        padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           color: Colors.grey[300],
                           borderRadius: BorderRadius.circular(10),
@@ -87,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                             color: Colors.red[500],
                             numberCount: 7,
                             title: "Scheduled",
-                            icon: Icons.schedule,
+                            icon: CupertinoIcons.calendar,
                             navigate: () {
                               Navigator.of(context)
                                   .pushNamed(ScheduledScreen.routeName);
@@ -95,14 +95,14 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 15),
                       Row(
                         children: [
                           MenuBox(
                             color: Colors.grey[800],
                             numberCount: 14,
                             title: "All",
-                            icon: Icons.store,
+                            icon: CupertinoIcons.tray_fill,
                             navigate: () {
                               Navigator.of(context)
                                   .pushNamed(ScheduledScreen.routeName);
@@ -113,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                             color: Colors.orange[600],
                             numberCount: 1,
                             title: "Flagged",
-                            icon: Icons.flag,
+                            icon: CupertinoIcons.flag_fill,
                             navigate: () {
                               Navigator.of(context)
                                   .pushNamed(ScheduledScreen.routeName);
@@ -184,7 +184,6 @@ class HomeScreen extends StatelessWidget {
                 Spacer(),
                 TextButton(
                   onPressed: () async {
-                    await Hive.openBox("reminderList");
                     return Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (_) => AddListScreen(),

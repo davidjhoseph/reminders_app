@@ -1,15 +1,10 @@
-import 'package:reminder_app/Models/ReminderDetails.dart';
-import 'package:reminder_app/Models/SingleList.dart';
+import 'package:reminder_app/Models/ReminderDetail.dart';
 
 class Reminder {
-  SingleList list;
   String title;
-  String notes;
-  ReminderDetails details;
+  ReminderDetail detail;
   Reminder({
-    this.list,
     this.title,
-    this.notes,
-    this.details,
+    this.detail,
   });
 }

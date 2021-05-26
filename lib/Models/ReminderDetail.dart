@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reminder_app/Models/SingleList.dart';
 
-class ReminderDetails {
+class ReminderDetail {
   SingleList list;
   DateTime date;
   TimeOfDay time;
@@ -13,7 +13,7 @@ class ReminderDetails {
   int priority;
   List<String> subtasks;
   String image;
-  ReminderDetails({
+  ReminderDetail({
     this.time,
     this.list,
     this.title,

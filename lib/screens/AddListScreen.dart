@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
 import 'package:reminder_app/Models/SingleList.dart';
 import 'package:reminder_app/provider/ReminderProvider.dart';
 
@@ -26,7 +25,6 @@ class _AddListScreenState extends State<AddListScreen> {
             leadingWidth: 70,
             leading: TextButton(
               onPressed: () async {
-                await Hive.close();
                 Navigator.of(context).pop();
               },
               child: Text(
@@ -51,7 +49,6 @@ class _AddListScreenState extends State<AddListScreen> {
                           color: response.selectedColor,
                           icon: response.selectedIcon,
                         );
-                        Hive.box("reminderList").add(list);
 
                         // response.addToList(
                         //   icon: response.selectedIcon,
