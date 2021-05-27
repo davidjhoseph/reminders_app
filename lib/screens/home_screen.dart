@@ -174,12 +174,17 @@ class HomeScreen extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Scaffold.of(context).showBottomSheet<void>(
-                      (BuildContext context) {
-                        return Center(
+                    showModalBottomSheet(
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      isScrollControlled: true,
+                      useRootNavigator: true,
+                      builder: (context) => Container(
+                        color: Colors.white,
+                        child: const Center(
                           child: Text("New Reminder"),
-                        );
-                      },
+                        ),
+                      ),
                     );
                   },
                   child: Row(
