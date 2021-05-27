@@ -2,8 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reminder_app/provider/ReminderProvider.dart';
-import 'package:reminder_app/screens/AddListScreen.dart';
-import 'package:reminder_app/screens/ScheduledScreen.dart';
+import 'package:reminder_app/screens/add_list_screen.dart';
+import 'package:reminder_app/screens/all_screen.dart';
+import 'package:reminder_app/screens/flagged_screen.dart';
+import 'package:reminder_app/screens/scheduled_screen.dart';
+import 'package:reminder_app/screens/single_list_screen.dart';
+import 'package:reminder_app/screens/today_screen.dart';
 import 'package:reminder_app/widgets/ReminderList.dart';
 import 'package:reminder_app/widgets/home_screen/MenuBox.dart';
 
@@ -79,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                             icon: Icons.calendar_today,
                             navigate: () {
                               Navigator.of(context)
-                                  .pushNamed(ScheduledScreen.routeName);
+                                  .pushNamed(TodayScreen.routeName);
                             },
                           ),
                           Spacer(),
@@ -105,7 +109,7 @@ class HomeScreen extends StatelessWidget {
                             icon: CupertinoIcons.tray_fill,
                             navigate: () {
                               Navigator.of(context)
-                                  .pushNamed(ScheduledScreen.routeName);
+                                  .pushNamed(AllScreen.routeName);
                             },
                           ),
                           Spacer(),
@@ -116,7 +120,7 @@ class HomeScreen extends StatelessWidget {
                             icon: CupertinoIcons.flag_fill,
                             navigate: () {
                               Navigator.of(context)
-                                  .pushNamed(ScheduledScreen.routeName);
+                                  .pushNamed(FlaggedScreen.routeName);
                             },
                           ),
                         ],
@@ -140,11 +144,17 @@ class HomeScreen extends StatelessWidget {
                                   children: [
                                     ...response.lists
                                         .map(
-                                          (e) => ReminderList(
-                                            color: e.color,
-                                            icon: e.icon,
-                                            title: e.title,
-                                            reminders: e.reminders,
+                                          (e) => GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context).pushNamed(
+                                                  SingleListScreen.routeName);
+                                            },
+                                            child: ReminderList(
+                                              color: e.color,
+                                              icon: e.icon,
+                                              title: e.title,
+                                              reminders: e.reminders,
+                                            ),
                                           ),
                                         )
                                         .toList(),
@@ -163,7 +173,15 @@ class HomeScreen extends StatelessWidget {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () => print("New Reminder"),
+                  onTap: () {
+                    Scaffold.of(context).showBottomSheet<void>(
+                      (BuildContext context) {
+                        return Center(
+                          child: Text("New Reminder"),
+                        );
+                      },
+                    );
+                  },
                   child: Row(
                     children: [
                       CircleAvatar(
